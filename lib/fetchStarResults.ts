@@ -1,4 +1,3 @@
-import { cacheLife } from "next/cache";
 import { fetchConstituencyDetail } from "./eci";
 import { STAR_CANDIDATES, type StarCandidate } from "./starCandidates";
 import type { CandidateResult } from "./types";
@@ -37,9 +36,6 @@ function matchesEciName(candidate: CandidateResult, eciName: string): boolean {
 }
 
 export async function fetchAllStarResults(): Promise<StarCandidateResult[]> {
-  "use cache";
-  cacheLife({ stale: 600, revalidate: 600, expire: 3600 });
-
   const details = await Promise.all(
     STAR_CANDIDATES.map((sc) => fetchConstituencyDetail(sc.acId))
   );

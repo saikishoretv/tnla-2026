@@ -44,7 +44,25 @@
       "Bash(pkill -f \"next dev\" 2>/dev/null; pkill -f \"next-server\" 2>/dev/null; sleep 1; echo \"stopped\")",
       "Bash(curl -s http://localhost:3001/api/constituencies 2>/dev/null | python3 -c \"\nimport sys, json\nd = json.load\\(sys.stdin\\)\n# Show a few changed ones - check key constituencies\nkeys = [12, 13, 19, 86, 10, 141, 120]\nfor c in d:\n    if c['id'] in keys:\n        print\\(f\\\\\"AC{c['id']:3d} {c['name']:28s} | {c['leadingParty']:6s} {c['leadingCandidate']:22s} | margin={c['margin']:6d}\\\\\"\\)\n\")",
       "Bash(gh auth:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(gh repo:*)",
+      "Bash(npx vercel:*)",
+      "Bash(dig CAA allelectoralresults.info +short 2>/dev/null)",
+      "Bash(dig A allelectoralresults.info +short)",
+      "Bash(curl -sI https://allelectoralresults.info 2>&1 | head -10)",
+      "Bash(curl -sI http://allelectoralresults.info 2>&1 | head -5)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://results.eci.gov.in/ResultAcGenMay2026/chartwiseresult-S22.htm\" 2>&1)",
+      "Bash(curl -s \"https://results.eci.gov.in/ResultAcGenMay2026/chartwiseresult-S22.htm\" 2>&1 | head -50)",
+      "Bash(curl -s \"https://results.eci.gov.in/ResultAcGenMay2026/chartwiseresult-S22.htm\" 2>&1 | grep -E \"xValues|yValues\")",
+      "Bash(curl -s -w \"\\\\nHTTP: %{http_code}\\\\n\" -H \"User-Agent: Mozilla/5.0 \\(Macintosh; Intel Mac OS X 10_15_7\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/124.0.0.0 Safari/537.36\" \"https://results.eci.gov.in/ResultAcGenMay2026/statewiseS221.htm\" 2>&1 | tail -20)",
+      "Bash(curl -s -w \"\\\\nHTTP: %{http_code}\\\\n\" \"https://results.eci.gov.in/ResultAcGenMay2026/statewiseS221.htm\" 2>&1 | tail -10)",
+      "Bash(curl -s -w \"\\\\nHTTP: %{http_code}\" --max-time 10 \"https://results.eci.gov.in/ResultAcGenMay2026/ConstituencywiseS221.htm\" 2>&1 | tail -5)",
+      "Bash(curl -s -w \"\\\\nHTTP: %{http_code}\" \"https://allelectoralresults.info\" 2>&1 | head -30)",
+      "Bash(curl -s -I \"https://allelectoralresults.info\" 2>&1 | grep -E \"x-vercel|server|Via|cf-ray|x-cache|region\" -i)",
+      "Bash(curl -s \"https://allelectoralresults.info\" 2>&1 | grep -o '\"parties\":\\\\[.\\\\{0,500\\\\}' | head -c 500)",
+      "Bash(curl -s \"https://allelectoralresults.info\" 2>&1 | python3 -c \"import sys,re; d=sys.stdin.read\\(\\); m=re.search\\(r'parties...\\(.{0,400}\\)', d\\); print\\(m.group\\(\\)[:400] if m else 'NOT FOUND'\\)\")",
+      "Bash(curl -s -I \"https://allelectoralresults.info\" 2>&1 | grep -i \"x-vercel\\\\|cache-control\")",
+      "Bash(curl -s \"https://allelectoralresults.info/api/summary\" 2>&1 | python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('parties count:', len\\(d.get\\('parties',[]\\)\\), '\\\\nfirst few parties:', [p.get\\('party'\\) for p in d.get\\('parties',[]\\)[:5]]\\)\")"
     ]
   }
 }

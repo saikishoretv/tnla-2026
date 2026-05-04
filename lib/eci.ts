@@ -1,5 +1,4 @@
 import * as cheerio from "cheerio";
-import { cacheLife } from "next/cache";
 import type {
   Constituency,
   PartySummary,
@@ -91,13 +90,12 @@ function getDistrict(acNo: number): string {
 // ---------------------------------------------------------------------------
 // Summary — parse chartwiseresult-S22.htm for party totals
 // ---------------------------------------------------------------------------
-export async function fetchSummary(): Promise<SummaryData> {
-  "use cache";
-  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
+const REVALIDATE = 300;
 
+export async function fetchSummary(): Promise<SummaryData> {
   const [chartRes, stateRes] = await Promise.all([
-    fetch(`${ECI_BASE}/chartwiseresult-S22.htm`),
-    fetch(`${ECI_BASE}/statewiseS221.htm`),
+    fetch(`${ECI_BASE}/chartwiseresult-S22.htm`, { next: { revalidate: REVALIDATE } }),
+    fetch(`${ECI_BASE}/statewiseS221.htm`, { next: { revalidate: REVALIDATE } }),
   ]);
   if (!chartRes.ok) console.error(`[eci] chartwiseresult: ${chartRes.status}`);
   if (!stateRes.ok) console.error(`[eci] statewiseS221: ${stateRes.status}`);
@@ -198,12 +196,9 @@ export async function fetchSummary(): Promise<SummaryData> {
 // All constituencies — parse all 12 statewise pages
 // ---------------------------------------------------------------------------
 export async function fetchAllConstituencies(): Promise<Constituency[]> {
-  "use cache";
-  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
-
   const pages = await Promise.all(
     Array.from({ length: 12 }, async (_, i) => {
-      const res = await fetch(`${ECI_BASE}/statewiseS22${i + 1}.htm`);
+      const res = await fetch(`${ECI_BASE}/statewiseS22${i + 1}.htm`, { next: { revalidate: REVALIDATE } });
       if (!res.ok) console.error(`[eci] statewiseS22${i + 1}: ${res.status}`);
       return res.text();
     })
@@ -279,10 +274,7 @@ export async function fetchAllConstituencies(): Promise<Constituency[]> {
 export async function fetchConstituencyDetail(
   id: number
 ): Promise<ConstituencyDetail> {
-  "use cache";
-  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
-
-  const res = await fetch(`${ECI_BASE}/ConstituencywiseS22${id}.htm`);
+  const res = await fetch(`${ECI_BASE}/ConstituencywiseS22${id}.htm`, { next: { revalidate: REVALIDATE } });
   const html = await res.text();
   const $ = cheerio.load(html);
 
