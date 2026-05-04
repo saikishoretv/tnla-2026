@@ -2,18 +2,21 @@
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { TN_DISTRICTS, PARTY_COLORS } from "@/lib/constants";
+import { PARTY_COLORS, ALLIANCES as ALLIANCE_MAP } from "@/lib/constants";
 import type { Constituency } from "@/lib/types";
 
-const PARTIES = ["TVK", "DMK", "AIADMK", "INC", "PMK", "BJP", "NTK", "AMMK"];
-const ALLIANCES = ["SPA Alliance", "ADMK+ Alliance", "TVK (Solo)", "NTK (Solo)"];
 const STATUSES = ["Won", "Leading"];
 
 export default function ConstituencyFilters({
   constituencies,
+  basePath = "/tnla2026",
 }: {
   constituencies: Constituency[];
+  basePath?: string;
 }) {
+  const parties = [...new Set(constituencies.map((c) => c.leadingParty))].sort();
+  const alliances = [...new Set(constituencies.map((c) => ALLIANCE_MAP[c.leadingParty] ?? "Others"))].sort();
+  const districts = [...new Set(constituencies.map((c) => c.district))].sort();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -86,7 +89,7 @@ export default function ConstituencyFilters({
                     onMouseDown={() => {
                       if (debounceRef.current) clearTimeout(debounceRef.current);
                       setOpen(false);
-                      router.push(`/tnla2026/constituency/${c.id}`);
+                      router.push(`${basePath}/constituency/${c.id}`);
                     }}
                   >
                     <div className="min-w-0">
@@ -117,7 +120,7 @@ export default function ConstituencyFilters({
         className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-500"
       >
         <option value="">All Parties</option>
-        {PARTIES.map((p) => (
+        {parties.map((p) => (
           <option key={p} value={p}>{p}</option>
         ))}
       </select>
@@ -129,7 +132,7 @@ export default function ConstituencyFilters({
         className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-500"
       >
         <option value="">All Alliances</option>
-        {ALLIANCES.map((a) => (
+        {alliances.map((a) => (
           <option key={a} value={a}>{a}</option>
         ))}
       </select>
@@ -141,7 +144,7 @@ export default function ConstituencyFilters({
         className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 focus:outline-none focus:border-gray-500"
       >
         <option value="">All Districts</option>
-        {TN_DISTRICTS.map((d) => (
+        {districts.map((d) => (
           <option key={d} value={d}>{d}</option>
         ))}
       </select>

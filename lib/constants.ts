@@ -18,47 +18,72 @@ export const PARTY_FULL_NAMES: Record<string, string> = {
 };
 
 export const PARTY_COLORS: Record<string, string> = {
+  // TN parties
   TVK: "#FACC15",
   DMK: "#F97316",
   ADMK: "#22C55E",
   AIADMK: "#22C55E",
-  INC: "#F97316",
   PMK: "#22C55E",
-  BJP: "#22C55E",
   NTK: "#EF4444",
   AMMK: "#22C55E",
-  CPI: "#F97316",
-  "CPI(M)": "#F97316",
   VCK: "#F97316",
-  IUML: "#F97316",
   MDMK: "#F97316",
   DMDK: "#F97316",
+  // Shared / national
+  INC: "#3B82F6",
+  BJP: "#F97316",
+  CPI: "#EF4444",
+  "CPI(M)": "#EF4444",
+  IUML: "#10B981",
+  // Kerala parties
+  KC: "#F59E0B",
+  "KC(J)": "#D97706",
+  NCP: "#8B5CF6",
+  RMP: "#EF4444",
+  BDJS: "#FB923C",
+  CMPKSC: "#EF4444",
+  // Fallback
   IND: "#6B7280",
 };
 
 export const ALLIANCES: Record<string, string> = {
+  // TN alliances
   DMK: "SPA Alliance",
-  INC: "SPA Alliance",
-  CPI: "SPA Alliance",
-  "CPI(M)": "SPA Alliance",
   VCK: "SPA Alliance",
   MDMK: "SPA Alliance",
   DMDK: "SPA Alliance",
-  IUML: "SPA Alliance",
   ADMK: "ADMK+ Alliance",
   AIADMK: "ADMK+ Alliance",
-  BJP: "ADMK+ Alliance",
   PMK: "ADMK+ Alliance",
   AMMK: "ADMK+ Alliance",
   TVK: "TVK (Solo)",
   NTK: "NTK (Solo)",
+  // Kerala alliances
+  "CPI(M)": "LDF",
+  CPI: "LDF",
+  NCP: "LDF",
+  RMP: "LDF",
+  CMPKSC: "LDF",
+  KC: "UDF",
+  "KC(J)": "UDF",
+  BDJS: "NDA",
+  // Shared (context-dependent — Kerala takes precedence here)
+  INC: "UDF",
+  IUML: "UDF",
+  BJP: "NDA",
 };
 
 export const ALLIANCE_COLORS: Record<string, string> = {
+  // TN
   "SPA Alliance": "#F97316",
   "ADMK+ Alliance": "#22C55E",
   "TVK (Solo)": "#FACC15",
   "NTK (Solo)": "#EF4444",
+  // Kerala
+  LDF: "#EF4444",
+  UDF: "#3B82F6",
+  NDA: "#F97316",
+  Others: "#6B7280",
 };
 
 export const ECI_BASE =
@@ -70,6 +95,23 @@ export const PARTY_LEADER_IMAGE: Record<string, { src: string; name: string }> =
   AIADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
   ADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
 };
+
+export const KERALA_DISTRICTS = [
+  "Thiruvananthapuram",
+  "Kollam",
+  "Pathanamthitta",
+  "Alappuzha",
+  "Kottayam",
+  "Idukki",
+  "Ernakulam",
+  "Thrissur",
+  "Palakkad",
+  "Malappuram",
+  "Kozhikode",
+  "Wayanad",
+  "Kannur",
+  "Kasaragod",
+];
 
 export const TN_DISTRICTS = [
   "Chennai",

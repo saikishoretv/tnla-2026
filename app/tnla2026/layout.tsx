@@ -47,20 +47,17 @@ export default function Tnla2026Layout({
       <header className="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2 justify-center sm:justify-start">
           <div className="flex items-center gap-3">
-            <Link href="/tnla2026" className="flex items-center gap-2">
-              <span className="text-lg font-bold text-white tracking-tight">
-                TNLA 2026
-              </span>
-              <span className="text-xs px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-medium">
-                RESULTS
-              </span>
-            </Link>
+            <Link href="/" className="text-2xl" aria-label="Home">☝️</Link>
             <Suspense fallback={null}>
               <ElectionSwitcher />
             </Suspense>
           </div>
           <Suspense fallback={null}>
-            <NavLinks />
+            <NavLinks links={[
+              { href: "/tnla2026", label: "Dashboard" },
+              { href: "/tnla2026/results", label: "All Results" },
+              { href: "/tnla2026/star-candidates", label: "Star Candidates" },
+            ]} />
           </Suspense>
         </div>
       </header>

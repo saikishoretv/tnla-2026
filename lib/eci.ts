@@ -108,3 +108,20 @@ export async function fetchConstituencyDetail(
 ): Promise<ConstituencyDetail> {
   return readLocalJson<ConstituencyDetail>(`constituency/${id}.json`);
 }
+
+// ---------------------------------------------------------------------------
+// Kerala
+// ---------------------------------------------------------------------------
+export async function fetchKeralaummary(): Promise<SummaryData> {
+  return readLocalJson<SummaryData>("kerala/summary.json");
+}
+
+export async function fetchKeralaConstituencies(): Promise<Constituency[]> {
+  return readLocalJson<Constituency[]>("kerala/constituencies.json");
+}
+
+export async function fetchKeralaConstituencyDetail(
+  id: number
+): Promise<ConstituencyDetail> {
+  return readLocalJson<ConstituencyDetail>(`kerala/constituency/${id}.json`);
+}

@@ -6,6 +6,7 @@ interface Props {
   constituencies: Constituency[];
   page: number;
   pageSize?: number;
+  basePath?: string;
 }
 
 const PAGE_SIZE = 30;
@@ -28,6 +29,7 @@ export default function ConstituencyTable({
   constituencies,
   page,
   pageSize = PAGE_SIZE,
+  basePath = "/tnla2026",
 }: Props) {
   const start = (page - 1) * pageSize;
   const slice = constituencies.slice(start, start + pageSize);
@@ -79,7 +81,7 @@ export default function ConstituencyTable({
                   <td className="px-4 py-3 text-gray-500 text-xs">{c.id}</td>
                   <td className="px-4 py-3">
                     <Link
-                      href={`/tnla2026/constituency/${c.id}`}
+                      href={`${basePath}/constituency/${c.id}`}
                       className="font-medium text-gray-100 hover:text-white hover:underline"
                     >
                       {c.name}

@@ -3,22 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const LINKS = [
-  { href: "/tnla2026", label: "Dashboard" },
-  { href: "/tnla2026/results", label: "All Results" },
-  { href: "/tnla2026/star-candidates", label: "Star Candidates" },
-];
-
-export default function NavLinks() {
+export default function NavLinks({
+  links,
+}: {
+  links: { href: string; label: string }[];
+}) {
   const pathname = usePathname();
 
   return (
     <nav className="flex flex-wrap items-center gap-1">
-      {LINKS.map(({ href, label }) => {
-        const active =
-          href === "/tnla2026"
-            ? pathname === "/tnla2026"
-            : pathname.startsWith(href);
+      {links.map(({ href, label }) => {
+        const isRoot = !links.find((l) => l.href !== href && href.startsWith(l.href));
+        const active = isRoot
+          ? pathname === href
+          : pathname.startsWith(href);
         return (
           <Link
             key={href}
