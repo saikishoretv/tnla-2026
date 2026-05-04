@@ -1,7 +1,6 @@
 /**
  * Fetches ECI election data and writes JSON files to data/
- * Run: node scripts/fetch-eci.mjs
- * Used by GitHub Actions to bypass Vercel's blocked IPs.
+ * Run from your laptop: node scripts/fetch-eci.mjs
  */
 import * as cheerio from "cheerio";
 import { writeFileSync, mkdirSync } from "fs";
@@ -342,3 +341,4 @@ for (const d of details) {
   writeFileSync(`data/constituency/${d.id}.json`, JSON.stringify(d));
 }
 console.log(`Written ${details.length} constituency detail files`);
+
