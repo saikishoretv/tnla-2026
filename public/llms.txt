@@ -23,6 +23,14 @@ A live election results tracker covering Indian state assembly elections.
 - Runner-up: LDF (Left Democratic Front, CPI(M)-led) with 38 seats
 - Third: NDA (BJP-led) with 3 seats
 
+### Pondicherry Legislative Assembly Election 2026 (PLA 2026)
+- Date: May 4, 2026
+- Constituencies: 30
+- Majority: 16 seats
+- Result: NDA Alliance won with 16 seats (AINRC 12, BJP 4)
+- Runner-up: INC Alliance with 6 seats (DMK 5, INC 1)
+- Others: TVK 2, IND 3, AIADMK 1, LJK 1, NMK 1
+
 ## Pages
 
 - /tnla2026 — Tamil Nadu dashboard with party tally and majority tracker
@@ -32,6 +40,9 @@ A live election results tracker covering Indian state assembly elections.
 - /kerala2026 — Kerala dashboard
 - /kerala2026/results — All 140 Kerala constituency results
 - /kerala2026/constituency/[1-140] — Individual Kerala constituency results
+- /pondicherry2026 — Pondicherry dashboard
+- /pondicherry2026/results — All 30 Pondicherry constituency results
+- /pondicherry2026/constituency/[1-30] — Individual Pondicherry constituency results
 
 ## Data Source
 

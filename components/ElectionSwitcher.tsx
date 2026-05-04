@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from "react";
 const ELECTIONS = [
   { id: "tnla2026", label: "TNLA 2026", sublabel: "Tamil Nadu", href: "/tnla2026" },
   { id: "kerala2026", label: "KLA 2026", sublabel: "Kerala", href: "/kerala2026" },
+  { id: "pondicherry2026", label: "PLA 2026", sublabel: "Pondicherry", href: "/pondicherry2026" },
 ];
 
 export default function ElectionSwitcher() {

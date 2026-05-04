@@ -35,6 +35,10 @@ export const PARTY_COLORS: Record<string, string> = {
   CPI: "#EF4444",
   "CPI(M)": "#EF4444",
   IUML: "#10B981",
+  // Pondicherry parties
+  AINRC: "#F97316",
+  LJK: "#8B5CF6",
+  NMK: "#6B7280",
   // Kerala parties
   KC: "#F59E0B",
   "KC(J)": "#D97706",
@@ -58,6 +62,10 @@ export const ALLIANCES: Record<string, string> = {
   AMMK: "ADMK+ Alliance",
   TVK: "TVK (Solo)",
   NTK: "NTK (Solo)",
+  // Pondicherry alliances
+  AINRC: "NDA Alliance",
+  LJK: "Others",
+  NMK: "Others",
   // Kerala alliances
   "CPI(M)": "LDF",
   CPI: "LDF",
@@ -82,6 +90,9 @@ export const ALLIANCE_COLORS: Record<string, string> = {
   // Kerala
   LDF: "#EF4444",
   UDF: "#3B82F6",
+  // Pondicherry + shared
+  "NDA Alliance": "#F97316",
+  "INC Alliance": "#3B82F6",
   NDA: "#F97316",
   Others: "#6B7280",
 };

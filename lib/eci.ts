@@ -110,6 +110,23 @@ export async function fetchConstituencyDetail(
 }
 
 // ---------------------------------------------------------------------------
+// Pondicherry
+// ---------------------------------------------------------------------------
+export async function fetchPondicherrySummary(): Promise<SummaryData> {
+  return readLocalJson<SummaryData>("pondicherry/summary.json");
+}
+
+export async function fetchPondicherryConstituencies(): Promise<Constituency[]> {
+  return readLocalJson<Constituency[]>("pondicherry/constituencies.json");
+}
+
+export async function fetchPondicherryConstituencyDetail(
+  id: number
+): Promise<ConstituencyDetail> {
+  return readLocalJson<ConstituencyDetail>(`pondicherry/constituency/${id}.json`);
+}
+
+// ---------------------------------------------------------------------------
 // Kerala
 // ---------------------------------------------------------------------------
 export async function fetchKeralaummary(): Promise<SummaryData> {
