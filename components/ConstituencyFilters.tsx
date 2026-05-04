@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { TN_DISTRICTS, PARTY_COLORS } from "@/lib/constants";
 import type { Constituency } from "@/lib/types";
 
@@ -37,13 +37,27 @@ export default function ConstituencyFilters({
   const alliance = searchParams.get("alliance") ?? "";
   const status = searchParams.get("status") ?? "";
 
+  // Local input state so typing is instant; URL updates after 350ms idle
+  const [inputValue, setInputValue] = useState(q);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Keep local value in sync if URL changes externally (e.g. Clear filters)
+  useEffect(() => { setInputValue(q); }, [q]);
+
+  const handleSearchChange = (value: string) => {
+    setInputValue(value);
+    setOpen(true);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => update("q", value), 350);
+  };
+
   const suggestions =
-    q.length >= 1
+    inputValue.length >= 1
       ? constituencies
           .filter(
             (c) =>
-              c.name.toLowerCase().includes(q.toLowerCase()) ||
-              c.leadingCandidate.toLowerCase().includes(q.toLowerCase())
+              c.name.toLowerCase().includes(inputValue.toLowerCase()) ||
+              c.leadingCandidate.toLowerCase().includes(inputValue.toLowerCase())
           )
           .slice(0, 8)
       : [];
@@ -55,8 +69,8 @@ export default function ConstituencyFilters({
         <input
           type="text"
           placeholder="Search constituency or candidate..."
-          value={q}
-          onChange={(e) => { update("q", e.target.value); setOpen(true); }}
+          value={inputValue}
+          onChange={(e) => handleSearchChange(e.target.value)}
           onFocus={() => setOpen(true)}
           onBlur={() => setTimeout(() => setOpen(false), 150)}
           className="bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-gray-500 w-64"
@@ -70,6 +84,7 @@ export default function ConstituencyFilters({
                   <button
                     className="w-full text-left px-4 py-2.5 hover:bg-gray-800 flex items-center justify-between gap-3 border-b border-gray-800/60 last:border-0"
                     onMouseDown={() => {
+                      if (debounceRef.current) clearTimeout(debounceRef.current);
                       setOpen(false);
                       router.push(`/tnla2026/constituency/${c.id}`);
                     }}
