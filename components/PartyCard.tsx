@@ -14,59 +14,74 @@ export default function PartyCard({
 
   return (
     <div
-      className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-2"
+      className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex flex-col gap-3"
       style={{ borderTopColor: party.color, borderTopWidth: 3 }}
     >
-      <div className="flex items-start justify-between gap-2">
-        <div>
+      {/* Top row: photo + count/abbr + won/leading */}
+      <div className="flex items-center gap-3">
+        {/* Leader photo */}
+        {leader ? (
+          <div
+            className="w-14 h-14 rounded-full overflow-hidden border-2 shrink-0"
+            style={{ borderColor: party.color }}
+          >
+            <Image
+              src={leader.src}
+              alt={leader.name}
+              width={56}
+              height={56}
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+        ) : (
+          <div
+            className="w-14 h-14 rounded-full shrink-0 flex items-center justify-center text-lg font-bold"
+            style={{ backgroundColor: party.color + "22", color: party.color }}
+          >
+            {party.party.slice(0, 2)}
+          </div>
+        )}
+
+        {/* Seat count + party abbr */}
+        <div className="flex-1 min-w-0">
           <p
-            className="text-2xl font-bold tabular-nums"
+            className="text-4xl font-bold tabular-nums leading-none"
             style={{ color: party.color }}
           >
             {party.total}
           </p>
-          <p className="text-xs text-gray-400 font-medium uppercase tracking-wide mt-0.5">
+          <p className="text-sm text-gray-300 font-semibold mt-1">
             {party.party}
           </p>
         </div>
-        <div className="flex flex-col items-end gap-1">
-          {leader && (
-            <div
-              className="w-10 h-10 rounded-full overflow-hidden border-2 shrink-0"
-              style={{ borderColor: party.color }}
-            >
-              <Image
-                src={leader.src}
-                alt={leader.name}
-                width={40}
-                height={40}
-                className="w-full h-full object-cover object-top"
-              />
-            </div>
-          )}
-          <div className="text-right text-xs text-gray-500">
-            {party.won > 0 && (
-              <p>
-                <span className="text-green-400 font-semibold">{party.won}</span>{" "}
-                Won
-              </p>
-            )}
-            <p>
-              <span className="text-yellow-400 font-semibold">
-                {party.leading}
-              </span>{" "}
-              Leading
+
+        {/* Won / Leading */}
+        <div className="text-right text-sm shrink-0">
+          {party.won > 0 && (
+            <p className="leading-snug">
+              <span className="text-green-400 font-bold">{party.won}</span>
+              <span className="text-gray-400"> Won</span>
             </p>
-          </div>
+          )}
+          <p className="leading-snug">
+            <span className="text-yellow-400 font-bold">{party.leading}</span>
+            <span className="text-gray-400"> Leading</span>
+          </p>
         </div>
       </div>
+
+      {/* Full name */}
       <p className="text-xs text-gray-500 truncate">{party.fullName}</p>
-      <div className="w-full bg-gray-800 rounded-full h-1.5 mt-1">
+
+      {/* Progress bar */}
+      <div className="w-full bg-gray-800 rounded-full h-1.5">
         <div
           className="h-1.5 rounded-full transition-all duration-500"
           style={{ width: `${pct}%`, backgroundColor: party.color }}
         />
       </div>
+
+      {/* Alliance */}
       <p className="text-xs text-gray-600">{party.alliance}</p>
     </div>
   );

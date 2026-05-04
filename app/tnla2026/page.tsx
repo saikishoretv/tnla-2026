@@ -82,7 +82,7 @@ async function DashboardContent() {
           <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">
             Party Tally
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {summary.parties
               .filter((p) => p.total > 0)
               .map((party) => (
