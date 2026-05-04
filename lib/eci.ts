@@ -1,4 +1,6 @@
 import * as cheerio from "cheerio";
+import { existsSync, readFileSync } from "fs";
+import path from "path";
 import type {
   Constituency,
   PartySummary,
@@ -90,9 +92,37 @@ function getDistrict(acNo: number): string {
 // ---------------------------------------------------------------------------
 // Summary — parse chartwiseresult-S22.htm for party totals
 // ---------------------------------------------------------------------------
-const REVALIDATE = 300;
+const REVALIDATE = 60;
+const GITHUB_RAW =
+  "https://raw.githubusercontent.com/saikishoretv/tnla-2026/main/data";
+
+function readLocalJson<T>(filename: string): T | null {
+  try {
+    const p = path.join(process.cwd(), "data", filename);
+    if (existsSync(p)) return JSON.parse(readFileSync(p, "utf-8")) as T;
+  } catch {}
+  return null;
+}
 
 export async function fetchSummary(): Promise<SummaryData> {
+  // 1. Try deployed data file (populated by GitHub Actions)
+  const localData = readLocalJson<SummaryData>("summary.json");
+  if (localData?.parties?.length) return localData;
+
+  // 2. Try GitHub raw URL (updated by Actions without triggering Vercel redeploy)
+  try {
+    const ghRes = await fetch(`${GITHUB_RAW}/summary.json`, {
+      next: { revalidate: REVALIDATE },
+    });
+    if (ghRes.ok) {
+      const data = (await ghRes.json()) as SummaryData;
+      if (data?.parties?.length) return data;
+    }
+  } catch (e) {
+    console.error("[eci] github raw fetch failed:", e);
+  }
+
+  // 3. Fallback: direct ECI fetch
   const [chartRes, stateRes] = await Promise.all([
     fetch(`${ECI_BASE}/chartwiseresult-S22.htm`, { next: { revalidate: REVALIDATE } }),
     fetch(`${ECI_BASE}/statewiseS221.htm`, { next: { revalidate: REVALIDATE } }),
@@ -196,6 +226,24 @@ export async function fetchSummary(): Promise<SummaryData> {
 // All constituencies — parse all 12 statewise pages
 // ---------------------------------------------------------------------------
 export async function fetchAllConstituencies(): Promise<Constituency[]> {
+  // 1. Try deployed data file
+  const localData = readLocalJson<Constituency[]>("constituencies.json");
+  if (localData?.length) return localData;
+
+  // 2. Try GitHub raw URL
+  try {
+    const ghRes = await fetch(`${GITHUB_RAW}/constituencies.json`, {
+      next: { revalidate: REVALIDATE },
+    });
+    if (ghRes.ok) {
+      const data = (await ghRes.json()) as Constituency[];
+      if (data?.length) return data;
+    }
+  } catch (e) {
+    console.error("[eci] github raw fetch failed:", e);
+  }
+
+  // 3. Fallback: direct ECI fetch
   const pages = await Promise.all(
     Array.from({ length: 12 }, async (_, i) => {
       const res = await fetch(`${ECI_BASE}/statewiseS22${i + 1}.htm`, { next: { revalidate: REVALIDATE } });
