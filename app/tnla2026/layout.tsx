@@ -44,7 +44,7 @@ export default function Tnla2026Layout({
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
           <Link href="/tnla2026" className="flex items-center gap-2">
             <span className="text-lg font-bold text-white tracking-tight">
               TNLA 2026
