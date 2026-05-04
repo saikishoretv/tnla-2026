@@ -1,5 +1,12 @@
+import Image from "next/image";
 import type { PartySummary } from "@/lib/types";
 import { ALLIANCE_COLORS } from "@/lib/constants";
+
+const ALLIANCE_LEADER: Record<string, { src: string; name: string }> = {
+  "TVK (Solo)": { src: "/leaders/vijay.jpg", name: "Thalapathy Vijay" },
+  "SPA Alliance": { src: "/leaders/stalin.jpg", name: "MK Stalin" },
+  "ADMK+ Alliance": { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
+};
 
 function groupByAlliance(parties: PartySummary[]) {
   const map = new Map<string, number>();
@@ -33,20 +40,53 @@ export default function MajorityTracker({
         </span>
       </div>
 
-      {/* Stacked bar */}
-      <div className="flex w-full h-6 rounded-lg overflow-hidden gap-px bg-gray-800 mb-4">
-        {alliances.map(({ alliance, seats }) => (
-          <div
-            key={alliance}
-            className="h-full transition-all duration-700"
-            style={{
-              width: `${(seats / total) * 100}%`,
-              backgroundColor:
-                ALLIANCE_COLORS[alliance] ?? "#6B7280",
-            }}
-            title={`${alliance}: ${seats} seats`}
-          />
-        ))}
+      {/* Stacked bar with leader images */}
+      <div className="relative mb-4">
+        {/* Bar */}
+        <div className="flex w-full h-10 rounded-lg overflow-hidden gap-px bg-gray-800">
+          {alliances.map(({ alliance, seats }) => (
+            <div
+              key={alliance}
+              className="h-full transition-all duration-700"
+              style={{
+                width: `${(seats / total) * 100}%`,
+                backgroundColor: ALLIANCE_COLORS[alliance] ?? "#6B7280",
+              }}
+              title={`${alliance}: ${seats} seats`}
+            />
+          ))}
+        </div>
+        {/* Leader avatars at start of each segment */}
+        {(() => {
+          let cumPct = 0;
+          return alliances.map(({ alliance, seats }) => {
+            const startPct = cumPct;
+            cumPct += (seats / total) * 100;
+            const leader = ALLIANCE_LEADER[alliance];
+            if (!leader) return null;
+            const color = ALLIANCE_COLORS[alliance] ?? "#6B7280";
+            return (
+              <div
+                key={alliance}
+                className="absolute top-1/2 -translate-y-1/2 rounded-full overflow-hidden border-2"
+                style={{
+                  left: `calc(${startPct}% + 4px)`,
+                  width: 32,
+                  height: 32,
+                  borderColor: color,
+                }}
+              >
+                <Image
+                  src={leader.src}
+                  alt={leader.name}
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+            );
+          });
+        })()}
       </div>
 
       {/* Majority line indicator */}
