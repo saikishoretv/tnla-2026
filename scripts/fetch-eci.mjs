@@ -270,6 +270,52 @@ async function fetchAllConstituencies() {
   return constituencies.sort((a, b) => a.id - b.id);
 }
 
+async function fetchConstituencyDetail(id) {
+  const res = await fetch(`${ECI_BASE}/ConstituencywiseS22${id}.htm`);
+  if (!res.ok) { console.error(`ConstituencywiseS22${id}: ${res.status}`); return null; }
+  const html = await res.text();
+  const $ = cheerio.load(html);
+
+  const h2Text = $("h2").text();
+  const nameMatch = h2Text.match(/Assembly Constituency\s+\d+\s*[-–]\s*([^(]+)/i);
+  const name = nameMatch?.[1]?.trim() ?? `Constituency ${id}`;
+
+  const candidates = [];
+  $("table tbody tr").each((_, row) => {
+    const cells = $(row).children("td");
+    if (cells.length < 5) return;
+    const col1 = cells.eq(1).text().trim();
+    const col2 = cells.eq(2).text().trim();
+    if (!col1 || !col2 || /candidate|party|name/i.test(col1)) return;
+    const evmVotes = parseInt(cells.eq(3).text().replace(/,/g, "").trim()) || 0;
+    const postalVotes = parseInt(cells.eq(4).text().replace(/,/g, "").trim()) || 0;
+    const totalVotes = cells.length > 5 ? (parseInt(cells.eq(5).text().replace(/,/g, "").trim()) || evmVotes + postalVotes) : evmVotes + postalVotes;
+    const percentage = cells.length > 6 ? (parseFloat(cells.eq(6).text().trim()) || 0) : 0;
+    candidates.push({ rank: candidates.length + 1, name: col1, party: resolveAbbr(col2) || col2, evmVotes, postalVotes, totalVotes, percentage, isLeading: false });
+  });
+
+  candidates.sort((a, b) => b.totalVotes - a.totalVotes);
+  candidates.forEach((c, i) => { c.rank = i + 1; c.isLeading = i === 0; });
+
+  const bodyText = $("body").text();
+  const round = bodyText.match(/Round\s+(\d+\s+of\s+\d+)/i)?.[1] ?? bodyText.match(/Round\s+(\d+)/i)?.[1] ?? "";
+  const lastUpdated = bodyText.match(/Last Updated[:\s]+([^\n]+)/i)?.[1]?.trim() ?? "";
+
+  return { id, name, district: getDistrict(id), candidates, totalVotesCounted: candidates.reduce((s, c) => s + c.totalVotes, 0), round, lastUpdated };
+}
+
+async function fetchAllConstituencyDetails() {
+  const BATCH = 20;
+  const results = [];
+  for (let start = 1; start <= 234; start += BATCH) {
+    const ids = Array.from({ length: Math.min(BATCH, 235 - start) }, (_, i) => start + i);
+    const batch = await Promise.all(ids.map(fetchConstituencyDetail));
+    results.push(...batch);
+    process.stdout.write(`  fetched AC ${start}–${start + ids.length - 1}\n`);
+  }
+  return results.filter(Boolean);
+}
+
 // Main
 console.log("Fetching ECI data...");
 const [summary, constituencies] = await Promise.all([
@@ -283,4 +329,11 @@ console.log(`Constituencies: ${constituencies.length} fetched`);
 mkdirSync("data", { recursive: true });
 writeFileSync("data/summary.json", JSON.stringify(summary));
 writeFileSync("data/constituencies.json", JSON.stringify(constituencies));
-console.log("Written to data/summary.json and data/constituencies.json");
+
+console.log("Fetching all 234 constituency details...");
+const details = await fetchAllConstituencyDetails();
+mkdirSync("data/constituency", { recursive: true });
+for (const d of details) {
+  writeFileSync(`data/constituency/${d.id}.json`, JSON.stringify(d));
+}
+console.log(`Written ${details.length} constituency detail files`);

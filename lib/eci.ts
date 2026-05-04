@@ -322,6 +322,22 @@ export async function fetchAllConstituencies(): Promise<Constituency[]> {
 export async function fetchConstituencyDetail(
   id: number
 ): Promise<ConstituencyDetail> {
+  // 1. Try deployed data file
+  const localData = readLocalJson<ConstituencyDetail>(`constituency/${id}.json`);
+  if (localData?.candidates?.length) return localData;
+
+  // 2. Try GitHub raw URL
+  try {
+    const ghRes = await fetch(`${GITHUB_RAW}/constituency/${id}.json`, {
+      next: { revalidate: REVALIDATE },
+    });
+    if (ghRes.ok) {
+      const data = (await ghRes.json()) as ConstituencyDetail;
+      if (data?.candidates?.length) return data;
+    }
+  } catch {}
+
+  // 3. Fallback: direct ECI fetch
   const res = await fetch(`${ECI_BASE}/ConstituencywiseS22${id}.htm`, { next: { revalidate: REVALIDATE } });
   const html = await res.text();
   const $ = cheerio.load(html);
