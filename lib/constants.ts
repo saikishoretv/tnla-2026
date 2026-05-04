@@ -44,6 +44,11 @@ export const PARTY_COLORS: Record<string, string> = {
   AITC: "#10B981",
   AISF: "#8B5CF6",
   AJUP: "#06B6D4",
+  // Assam parties
+  AGP: "#F59E0B",
+  BOPF: "#06B6D4",
+  AIUDF: "#10B981",
+  RJRD: "#8B5CF6",
   // Kerala parties
   KC: "#F59E0B",
   "KC(J)": "#D97706",
@@ -76,6 +81,11 @@ export const ALLIANCES: Record<string, string> = {
   AITC: "TMC Alliance",
   AISF: "Left+Congress",
   AJUP: "Others",
+  // Assam alliances
+  AGP: "NDA",
+  BOPF: "NDA",
+  AIUDF: "INDIA Alliance",
+  RJRD: "Others",
   // Kerala alliances
   "CPI(M)": "LDF",
   CPI: "LDF",
@@ -116,6 +126,26 @@ export const PARTY_LEADER_IMAGE: Record<string, { src: string; name: string }> =
   AIADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
   ADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
 };
+
+export const ASSAM_DISTRICTS = [
+  "Kokrajhar",
+  "Dhubri",
+  "Bongaigaon",
+  "Barpeta",
+  "Nalbari",
+  "Kamrup",
+  "Kamrup Metropolitan",
+  "Darrang",
+  "Udalguri",
+  "Sonitpur",
+  "Lakhimpur",
+  "Dhemaji",
+  "Tinsukia",
+  "Dibrugarh",
+  "Sibasagar",
+  "Jorhat",
+  "Golaghat",
+];
 
 export const WB_DISTRICTS = [
   "Cooch Behar",

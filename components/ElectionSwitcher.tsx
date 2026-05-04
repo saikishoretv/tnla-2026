@@ -8,6 +8,7 @@ const ELECTIONS = [
   { id: "kerala2026", label: "KLA 2026", sublabel: "Kerala", href: "/kerala2026" },
   { id: "pondicherry2026", label: "PLA 2026", sublabel: "Pondicherry", href: "/pondicherry2026" },
   { id: "westbengal2026", label: "WLA 2026", sublabel: "West Bengal", href: "/westbengal2026" },
+  { id: "assam2026", label: "ALA 2026", sublabel: "Assam", href: "/assam2026" },
 ];
 
 export default function ElectionSwitcher() {

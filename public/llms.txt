@@ -32,6 +32,15 @@ A live election results tracker covering Indian state assembly elections.
 - Others: Left+Congress 3 seats (INC 2, CPI(M) 1, AISF 1), AJUP 2
 - Key outcome: BJP swept Bengal ending 5 years of TMC rule
 
+### Assam Legislative Assembly Election 2026 (ALA 2026)
+- Date: May 4, 2026
+- Constituencies: 126
+- Majority: 64 seats
+- Result: NDA won with 102 seats — BJP 82, AGP 10, BOPF 10
+- Runner-up: INDIA Alliance with 21 seats (INC 19, AIUDF 2)
+- Others: RJRD 2, AITC 1
+- Key outcome: Himanta Biswa Sarma returns as CM; Badruddin Ajmal's AIUDF routed
+
 ### Pondicherry Legislative Assembly Election 2026 (PLA 2026)
 - Date: May 4, 2026
 - Constituencies: 30
@@ -56,6 +65,12 @@ A live election results tracker covering Indian state assembly elections.
 - /westbengal2026/results — All 294 West Bengal constituency results
 - /westbengal2026/constituency/[1-294] — Individual West Bengal constituency results
 - /westbengal2026/star-candidates — Sitting ministers and key candidates (Mamata, Suvendu, Firhad Hakim, etc.)
+- /assam2026 — Assam dashboard
+- /assam2026/results — All 126 Assam constituency results
+- /assam2026/constituency/[1-126] — Individual Assam constituency results
+- /assam2026/star-candidates — Key candidates (Himanta Biswa Sarma, Gaurav Gogoi, Badruddin Ajmal, Akhil Gogoi, etc.)
+- /kerala2026/star-candidates — Key candidates (Pinarayi Vijayan, K.K. Shailaja, V.D. Satheesan, etc.)
+- /pondicherry2026/star-candidates — Key candidates (N. Rangasamy, A. Namassivayam, etc.)
 
 ## Data Source
 
