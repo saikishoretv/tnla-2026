@@ -63,10 +63,12 @@ export default function PartyCard({
               <span className="text-gray-400"> Won</span>
             </p>
           )}
-          <p className="leading-snug">
-            <span className="text-yellow-400 font-bold">{party.leading}</span>
-            <span className="text-gray-400"> Leading</span>
-          </p>
+          {party.leading > 0 && (
+            <p className="leading-snug">
+              <span className="text-yellow-400 font-bold">{party.leading}</span>
+              <span className="text-gray-400"> Leading</span>
+            </p>
+          )}
         </div>
       </div>
 
