@@ -90,7 +90,7 @@ export default function MajorityTracker({
       </div>
 
       {/* Majority line indicator */}
-      <div className="relative mb-4">
+      <div className="relative h-8 mb-2">
         <div
           className="absolute top-0 w-px h-3 bg-white/60"
           style={{ left: `${(majority / total) * 100}%` }}
@@ -104,7 +104,7 @@ export default function MajorityTracker({
       </div>
 
       {/* Alliance legend */}
-      <div className="mt-8 flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3">
         {alliances.map(({ alliance, seats }) => (
           <div key={alliance} className="flex items-center gap-1.5">
             <span
