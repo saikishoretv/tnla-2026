@@ -64,6 +64,13 @@ export const ALLIANCE_COLORS: Record<string, string> = {
 export const ECI_BASE =
   "https://results.eci.gov.in/ResultAcGenMay2026";
 
+export const PARTY_LEADER_IMAGE: Record<string, { src: string; name: string }> = {
+  TVK: { src: "/leaders/vijay.jpg", name: "Thalapathy Vijay" },
+  DMK: { src: "/leaders/stalin.jpg", name: "MK Stalin" },
+  AIADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
+  ADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
+};
+
 export const TN_DISTRICTS = [
   "Chennai",
   "Tiruvallur",
