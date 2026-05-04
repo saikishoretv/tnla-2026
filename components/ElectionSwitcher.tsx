@@ -1,0 +1,66 @@
+"use client";
+
+import { useRouter, usePathname } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
+
+const ELECTIONS = [
+  { id: "tnla2026", label: "TNLA 2026", sublabel: "Tamil Nadu", href: "/tnla2026" },
+  { id: "kerala2026", label: "KLA 2026", sublabel: "Kerala", href: "/kerala2026" },
+];
+
+export default function ElectionSwitcher() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const current = ELECTIONS.find((e) => pathname.startsWith(`/${e.id}`)) ?? ELECTIONS[0];
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors text-sm"
+      >
+        <span className="text-white font-medium">{current.label}</span>
+        <span className="text-gray-400 hidden sm:inline">{current.sublabel}</span>
+        <svg
+          className={`w-3.5 h-3.5 text-gray-400 transition-transform ${open ? "rotate-180" : ""}`}
+          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      {open && (
+        <div className="absolute right-0 mt-1 w-48 rounded-xl border border-gray-700 bg-gray-900 shadow-xl z-50 overflow-hidden">
+          {ELECTIONS.map((e) => {
+            const active = e.id === current.id;
+            return (
+              <button
+                key={e.id}
+                onClick={() => { router.push(e.href); setOpen(false); }}
+                className={`w-full text-left px-4 py-3 flex flex-col gap-0.5 transition-colors ${
+                  active ? "bg-gray-800" : "hover:bg-gray-800"
+                }`}
+              >
+                <span className={`text-sm font-medium ${active ? "text-white" : "text-gray-300"}`}>
+                  {e.label}
+                </span>
+                <span className="text-xs text-gray-500">{e.sublabel}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

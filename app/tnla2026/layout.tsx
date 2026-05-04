@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import NavLinks from "@/components/NavLinks";
+import ElectionSwitcher from "@/components/ElectionSwitcher";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -45,14 +46,19 @@ export default function Tnla2026Layout({
     <>
       <header className="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2 justify-center sm:justify-start">
-          <Link href="/tnla2026" className="flex items-center gap-2">
-            <span className="text-lg font-bold text-white tracking-tight">
-              TNLA 2026
-            </span>
-            <span className="text-xs px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-medium">
-              RESULTS
-            </span>
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link href="/tnla2026" className="flex items-center gap-2">
+              <span className="text-lg font-bold text-white tracking-tight">
+                TNLA 2026
+              </span>
+              <span className="text-xs px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 font-medium">
+                RESULTS
+              </span>
+            </Link>
+            <Suspense fallback={null}>
+              <ElectionSwitcher />
+            </Suspense>
+          </div>
           <Suspense fallback={null}>
             <NavLinks />
           </Suspense>
