@@ -95,9 +95,15 @@ export async function fetchSummary(): Promise<SummaryData> {
   "use cache";
   cacheLife({ stale: 600, revalidate: 600, expire: 3600 });
 
+  const [chartRes, stateRes] = await Promise.all([
+    fetch(`${ECI_BASE}/chartwiseresult-S22.htm`),
+    fetch(`${ECI_BASE}/statewiseS221.htm`),
+  ]);
+  if (!chartRes.ok) console.error(`[eci] chartwiseresult: ${chartRes.status}`);
+  if (!stateRes.ok) console.error(`[eci] statewiseS221: ${stateRes.status}`);
   const [chartHtml, stateHtml] = await Promise.all([
-    fetch(`${ECI_BASE}/chartwiseresult-S22.htm`).then((r) => r.text()),
-    fetch(`${ECI_BASE}/statewiseS221.htm`).then((r) => r.text()),
+    chartRes.text(),
+    stateRes.text(),
   ]);
 
   // Extract party names + seat counts from JavaScript vars in chartwiseresult
@@ -196,9 +202,11 @@ export async function fetchAllConstituencies(): Promise<Constituency[]> {
   cacheLife({ stale: 600, revalidate: 600, expire: 3600 });
 
   const pages = await Promise.all(
-    Array.from({ length: 12 }, (_, i) =>
-      fetch(`${ECI_BASE}/statewiseS22${i + 1}.htm`).then((r) => r.text())
-    )
+    Array.from({ length: 12 }, async (_, i) => {
+      const res = await fetch(`${ECI_BASE}/statewiseS22${i + 1}.htm`);
+      if (!res.ok) console.error(`[eci] statewiseS22${i + 1}: ${res.status}`);
+      return res.text();
+    })
   );
 
   const constituencies: Constituency[] = [];
