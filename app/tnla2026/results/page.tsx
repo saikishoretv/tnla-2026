@@ -88,7 +88,7 @@ async function ResultsContent({
       </div>
 
       <div className="mb-5">
-        <ConstituencyFilters />
+        <ConstituencyFilters constituencies={all} />
       </div>
 
       <ConstituencyTable constituencies={filtered} page={page} />
