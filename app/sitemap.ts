@@ -26,6 +26,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  const wbConstituencies = Array.from({ length: 294 }, (_, i) => ({
+    url: `${BASE}/westbengal2026/constituency/${i + 1}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
   return [
     { url: BASE, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE}/tnla2026`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
@@ -35,8 +42,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/kerala2026/results`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${BASE}/pondicherry2026`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE}/pondicherry2026/results`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/westbengal2026`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${BASE}/westbengal2026/results`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${BASE}/westbengal2026/star-candidates`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     ...tnConstituencies,
     ...keralaConstituencies,
     ...pondicherryConstituencies,
+    ...wbConstituencies,
   ];
 }

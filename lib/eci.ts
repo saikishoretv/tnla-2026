@@ -137,6 +137,23 @@ export async function fetchKeralaConstituencies(): Promise<Constituency[]> {
   return readLocalJson<Constituency[]>("kerala/constituencies.json");
 }
 
+// ---------------------------------------------------------------------------
+// West Bengal
+// ---------------------------------------------------------------------------
+export async function fetchWBSummary(): Promise<SummaryData> {
+  return readLocalJson<SummaryData>("westbengal/summary.json");
+}
+
+export async function fetchWBConstituencies(): Promise<Constituency[]> {
+  return readLocalJson<Constituency[]>("westbengal/constituencies.json");
+}
+
+export async function fetchWBConstituencyDetail(
+  id: number
+): Promise<ConstituencyDetail> {
+  return readLocalJson<ConstituencyDetail>(`westbengal/constituency/${id}.json`);
+}
+
 export async function fetchKeralaConstituencyDetail(
   id: number
 ): Promise<ConstituencyDetail> {

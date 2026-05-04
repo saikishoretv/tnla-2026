@@ -39,6 +39,11 @@ export const PARTY_COLORS: Record<string, string> = {
   AINRC: "#F97316",
   LJK: "#8B5CF6",
   NMK: "#6B7280",
+  // West Bengal parties
+  TMC: "#10B981",
+  AITC: "#10B981",
+  AISF: "#8B5CF6",
+  AJUP: "#06B6D4",
   // Kerala parties
   KC: "#F59E0B",
   "KC(J)": "#D97706",
@@ -66,6 +71,11 @@ export const ALLIANCES: Record<string, string> = {
   AINRC: "NDA Alliance",
   LJK: "Others",
   NMK: "Others",
+  // West Bengal alliances
+  TMC: "TMC Alliance",
+  AITC: "TMC Alliance",
+  AISF: "Left+Congress",
+  AJUP: "Others",
   // Kerala alliances
   "CPI(M)": "LDF",
   CPI: "LDF",
@@ -106,6 +116,31 @@ export const PARTY_LEADER_IMAGE: Record<string, { src: string; name: string }> =
   AIADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
   ADMK: { src: "/leaders/edappadi.jpg", name: "Edappadi K. Palaniswami" },
 };
+
+export const WB_DISTRICTS = [
+  "Cooch Behar",
+  "Alipurduar",
+  "Jalpaiguri",
+  "Darjeeling",
+  "Kalimpong",
+  "Uttar Dinajpur",
+  "Dakshin Dinajpur",
+  "Malda",
+  "Murshidabad",
+  "Birbhum",
+  "North 24 Parganas",
+  "Kolkata",
+  "Howrah",
+  "Hooghly",
+  "South 24 Parganas",
+  "Purba Medinipur",
+  "Paschim Medinipur",
+  "Jhargram",
+  "Bankura",
+  "Purulia",
+  "Paschim Bardhaman",
+  "Purba Bardhaman",
+];
 
 export const KERALA_DISTRICTS = [
   "Thiruvananthapuram",

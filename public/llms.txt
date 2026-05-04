@@ -23,6 +23,15 @@ A live election results tracker covering Indian state assembly elections.
 - Runner-up: LDF (Left Democratic Front, CPI(M)-led) with 38 seats
 - Third: NDA (BJP-led) with 3 seats
 
+### West Bengal Legislative Assembly Election 2026 (WLA 2026)
+- Date: May 4, 2026
+- Constituencies: 294
+- Majority: 148 seats
+- Result: BJP (NDA) won with 206 seats — massive victory
+- Runner-up: TMC (All India Trinamool Congress) with 81 seats — Mamata Banerjee lost Bhabanipur
+- Others: Left+Congress 3 seats (INC 2, CPI(M) 1, AISF 1), AJUP 2
+- Key outcome: BJP swept Bengal ending 5 years of TMC rule
+
 ### Pondicherry Legislative Assembly Election 2026 (PLA 2026)
 - Date: May 4, 2026
 - Constituencies: 30
@@ -43,6 +52,10 @@ A live election results tracker covering Indian state assembly elections.
 - /pondicherry2026 — Pondicherry dashboard
 - /pondicherry2026/results — All 30 Pondicherry constituency results
 - /pondicherry2026/constituency/[1-30] — Individual Pondicherry constituency results
+- /westbengal2026 — West Bengal dashboard
+- /westbengal2026/results — All 294 West Bengal constituency results
+- /westbengal2026/constituency/[1-294] — Individual West Bengal constituency results
+- /westbengal2026/star-candidates — Sitting ministers and key candidates (Mamata, Suvendu, Firhad Hakim, etc.)
 
 ## Data Source
 
