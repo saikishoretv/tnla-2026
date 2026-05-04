@@ -22,9 +22,11 @@ jobs:
       - run: npm ci
 
       - name: Fetch ECI data
-        run: node scripts/fetch-eci.mjs
+        id: fetch
+        run: node scripts/fetch-eci.mjs && echo "ok=true" >> $GITHUB_OUTPUT || echo "ok=false" >> $GITHUB_OUTPUT
 
       - name: Commit data files
+        if: steps.fetch.outputs.ok == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

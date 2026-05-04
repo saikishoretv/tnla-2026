@@ -316,12 +316,17 @@ async function fetchAllConstituencyDetails() {
   return results.filter(Boolean);
 }
 
-// Main
+// Main — abort if ECI is unreachable (e.g. GitHub Actions IPs are blocked)
 console.log("Fetching ECI data...");
 const [summary, constituencies] = await Promise.all([
   fetchSummary(),
   fetchAllConstituencies(),
 ]);
+
+if (!summary.parties.length || !constituencies.length) {
+  console.error("ERROR: ECI returned empty data — likely IP blocked. Aborting without overwriting files.");
+  process.exit(1);
+}
 
 console.log(`Summary: ${summary.parties.length} parties, top: ${summary.parties[0]?.party} ${summary.parties[0]?.total}`);
 console.log(`Constituencies: ${constituencies.length} fetched`);
