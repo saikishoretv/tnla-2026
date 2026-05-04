@@ -1,0 +1,39 @@
+# allelectoralresults.info
+
+A live election results tracker covering Indian state assembly elections.
+
+## Current Elections
+
+### Tamil Nadu Legislative Assembly Election 2026 (TNLA 2026)
+- Date: May 4, 2026
+- Constituencies: 234
+- Majority: 118 seats
+- Result: TVK (Tamilaga Vettri Kazhagam) won with 107 seats
+- Runner-up: DMK (Dravida Munnetra Kazhagam) with 60 seats
+- Third: AIADMK (All India Anna Dravida Munnetra Kazhagam) with 47 seats
+- Key alliances: TVK (Solo) 107, SPA Alliance (DMK-led) 74, ADMK+ Alliance 53
+- Notable: Thalapathy Vijay's TVK won a landslide in their debut election
+
+### Kerala Legislative Assembly Election 2026 (KLA 2026)
+- Date: May 4, 2026
+- Constituencies: 140
+- Majority: 71 seats
+- Result: UDF (United Democratic Front, INC-led) won with 93 seats
+- Key parties: INC 63, IUML 22, KC 7
+- Runner-up: LDF (Left Democratic Front, CPI(M)-led) with 38 seats
+- Third: NDA (BJP-led) with 3 seats
+
+## Pages
+
+- /tnla2026 — Tamil Nadu dashboard with party tally and majority tracker
+- /tnla2026/results — All 234 TN constituency results with search and filters
+- /tnla2026/constituency/[1-234] — Individual TN constituency results
+- /tnla2026/star-candidates — Key politicians and their results
+- /kerala2026 — Kerala dashboard
+- /kerala2026/results — All 140 Kerala constituency results
+- /kerala2026/constituency/[1-140] — Individual Kerala constituency results
+
+## Data Source
+
+All data sourced from the Election Commission of India (results.eci.gov.in).
+Results are final as of May 5, 2026.

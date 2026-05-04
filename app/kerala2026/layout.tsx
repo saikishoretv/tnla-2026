@@ -36,8 +36,22 @@ export default function Kerala2026Layout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Kerala Legislative Assembly Election 2026",
+    "alternateName": "KLA 2026",
+    "startDate": "2026-05-04",
+    "endDate": "2026-05-04",
+    "location": { "@type": "Place", "name": "Kerala, India" },
+    "description": "Kerala Legislative Assembly Election 2026. Results for all 140 constituencies.",
+    "organizer": { "@type": "GovernmentOrganization", "name": "Election Commission of India", "url": "https://eci.gov.in" },
+    "url": "https://allelectoralresults.info/kerala2026",
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <header className="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-x-4 gap-y-2 justify-center sm:justify-start">
           <div className="flex items-center gap-3">
