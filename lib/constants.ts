@@ -18,21 +18,21 @@ export const PARTY_FULL_NAMES: Record<string, string> = {
 };
 
 export const PARTY_COLORS: Record<string, string> = {
-  TVK: "#e72bd9",
-  DMK: "#05c75a",
-  ADMK: "#c8a84b",
-  AIADMK: "#c8a84b",
-  INC: "#19AAED",
-  PMK: "#FF6B35",
-  BJP: "#FF8C00",
+  TVK: "#FACC15",
+  DMK: "#F97316",
+  ADMK: "#22C55E",
+  AIADMK: "#22C55E",
+  INC: "#F97316",
+  PMK: "#22C55E",
+  BJP: "#22C55E",
   NTK: "#EF4444",
-  AMMK: "#8B5CF6",
-  CPI: "#DC2626",
-  "CPI(M)": "#B91C1C",
-  VCK: "#3B82F6",
-  IUML: "#166534",
-  MDMK: "#F59E0B",
-  DMDK: "#FCD34D",
+  AMMK: "#22C55E",
+  CPI: "#F97316",
+  "CPI(M)": "#F97316",
+  VCK: "#F97316",
+  IUML: "#F97316",
+  MDMK: "#F97316",
+  DMDK: "#F97316",
   IND: "#6B7280",
 };
 
@@ -55,9 +55,9 @@ export const ALLIANCES: Record<string, string> = {
 };
 
 export const ALLIANCE_COLORS: Record<string, string> = {
-  "SPA Alliance": "#05c75a",
-  "ADMK+ Alliance": "#c8a84b",
-  "TVK (Solo)": "#e72bd9",
+  "SPA Alliance": "#F97316",
+  "ADMK+ Alliance": "#22C55E",
+  "TVK (Solo)": "#FACC15",
   "NTK (Solo)": "#EF4444",
 };
 
