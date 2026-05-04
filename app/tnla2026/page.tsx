@@ -47,53 +47,51 @@ async function DashboardContent() {
         />
       </div>
 
-      {/* Leading party banner */}
+      {/* Leading party banner + alliance cards */}
       {leadingParty && (
-        <div
-          className="mb-6 rounded-xl p-4 border flex items-center gap-4"
-          style={{
-            backgroundColor: leadingParty.color + "11",
-            borderColor: leadingParty.color + "44",
-          }}
-        >
+        <div className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {/* Currently leading */}
           <div
-            className="w-1 self-stretch rounded-full"
-            style={{ backgroundColor: leadingParty.color }}
-          />
-          <div className="flex-1 min-w-0">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-0.5">
-              Currently Leading
-            </p>
-            <p className="font-semibold text-white">
-              <span style={{ color: leadingParty.color }}>
-                {leadingParty.party}
-              </span>{" "}
-              — {leadingParty.fullName}
-            </p>
-            <p className="text-sm text-gray-300 mt-0.5">
-              <strong style={{ color: leadingParty.color }}>
-                {leadingParty.total}
-              </strong>{" "}
-              seats (
-              {leadingParty.won > 0 && `${leadingParty.won} won + `}
-              {leadingParty.leading} leading)
-              {leadingParty.total >= summary.majority && (
-                <span className="ml-2 text-green-400 font-semibold">
-                  · Majority secured
-                </span>
-              )}
-            </p>
+            className="sm:col-span-1 rounded-xl p-4 border flex items-center gap-3"
+            style={{
+              backgroundColor: leadingParty.color + "11",
+              borderColor: leadingParty.color + "44",
+            }}
+          >
+            <div
+              className="w-1 self-stretch rounded-full shrink-0"
+              style={{ backgroundColor: leadingParty.color }}
+            />
+            <div>
+              <p className="text-xs text-gray-400 uppercase tracking-wider mb-0.5">
+                Currently Leading
+              </p>
+              <p className="font-semibold text-white">
+                <span style={{ color: leadingParty.color }}>{leadingParty.party}</span>{" "}
+                — {leadingParty.fullName}
+              </p>
+              <p className="text-sm text-gray-300 mt-0.5">
+                <strong style={{ color: leadingParty.color }}>{leadingParty.total}</strong>{" "}
+                seats ({leadingParty.won > 0 && `${leadingParty.won} won + `}{leadingParty.leading} leading)
+                {leadingParty.total >= summary.majority && (
+                  <span className="ml-2 text-green-400 font-semibold">· Majority secured</span>
+                )}
+              </p>
+            </div>
           </div>
-          {/* Alliance totals */}
-          <div className="flex flex-wrap gap-3 shrink-0">
-            {allianceBadges.map((a) => (
-              <div key={a.label} className="flex flex-col items-center rounded-lg px-4 py-2"
-                style={{ backgroundColor: a.color + "18", border: `1px solid ${a.color}44` }}>
-                <span className="text-2xl font-bold" style={{ color: a.color }}>{a.seats}</span>
-                <span className="text-xs text-gray-400 mt-0.5 whitespace-nowrap">{a.label}</span>
-              </div>
-            ))}
-          </div>
+
+          {/* Alliance seat counts */}
+          {allianceBadges.map((a) => (
+            <div
+              key={a.label}
+              className="rounded-xl p-4 border flex flex-col justify-center items-center"
+              style={{ backgroundColor: a.color + "11", borderColor: a.color + "44" }}
+            >
+              <span className="text-4xl font-bold" style={{ color: a.color }}>{a.seats}</span>
+              <span className="text-sm text-gray-300 mt-1">{a.label}</span>
+              <span className="text-xs text-gray-500 mt-0.5">seats</span>
+            </div>
+          ))}
         </div>
       )}
 
