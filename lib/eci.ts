@@ -93,7 +93,7 @@ function getDistrict(acNo: number): string {
 // ---------------------------------------------------------------------------
 export async function fetchSummary(): Promise<SummaryData> {
   "use cache";
-  cacheLife({ stale: 600, revalidate: 600, expire: 3600 });
+  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
 
   const [chartRes, stateRes] = await Promise.all([
     fetch(`${ECI_BASE}/chartwiseresult-S22.htm`),
@@ -199,7 +199,7 @@ export async function fetchSummary(): Promise<SummaryData> {
 // ---------------------------------------------------------------------------
 export async function fetchAllConstituencies(): Promise<Constituency[]> {
   "use cache";
-  cacheLife({ stale: 600, revalidate: 600, expire: 3600 });
+  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
 
   const pages = await Promise.all(
     Array.from({ length: 12 }, async (_, i) => {
@@ -280,7 +280,7 @@ export async function fetchConstituencyDetail(
   id: number
 ): Promise<ConstituencyDetail> {
   "use cache";
-  cacheLife({ stale: 600, revalidate: 600, expire: 3600 });
+  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
 
   const res = await fetch(`${ECI_BASE}/ConstituencywiseS22${id}.htm`);
   const html = await res.text();
