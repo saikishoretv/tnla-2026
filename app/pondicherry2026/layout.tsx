@@ -49,6 +49,7 @@ export default function Pondicherry2026Layout({ children }: { children: React.Re
             <NavLinks links={[
               { href: "/pondicherry2026", label: "Dashboard" },
               { href: "/pondicherry2026/results", label: "All Results" },
+              { href: "/pondicherry2026/star-candidates", label: "Star Candidates" },
             ]} />
           </Suspense>
         </div>

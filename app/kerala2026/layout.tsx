@@ -64,6 +64,7 @@ export default function Kerala2026Layout({
             <NavLinks links={[
               { href: "/kerala2026", label: "Dashboard" },
               { href: "/kerala2026/results", label: "All Results" },
+              { href: "/kerala2026/star-candidates", label: "Star Candidates" },
             ]} />
           </Suspense>
         </div>
