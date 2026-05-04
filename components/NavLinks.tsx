@@ -25,7 +25,7 @@ export default function NavLinks() {
             href={href}
             className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
               active
-                ? "bg-gray-800 text-white font-medium"
+                ? "bg-gray-800 text-white font-medium ring-1 ring-gray-500"
                 : "text-gray-400 hover:text-white hover:bg-gray-800"
             }`}
           >
