@@ -42,7 +42,7 @@ async function ConstituencyDetailContent({ id }: { id: string }) {
     <>
       {/* Back link */}
       <Link
-        href="/results"
+        href="/tnla2026/results"
         className="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white mb-6"
       >
         ← Back to all results

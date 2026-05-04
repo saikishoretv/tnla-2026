@@ -116,7 +116,7 @@ export default async function StarCandidatesTable() {
                   {/* Constituency */}
                   <td className="px-4 py-3.5 hidden sm:table-cell">
                     <Link
-                      href={`/constituency/${r.acId}`}
+                      href={`/tnla2026/constituency/${r.acId}`}
                       className="text-gray-300 hover:text-white hover:underline font-medium text-xs"
                     >
                       {r.constituencyName}

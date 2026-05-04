@@ -2,7 +2,7 @@ import { fetchConstituencyDetail } from "@/lib/eci";
 
 export async function GET(
   _req: Request,
-  ctx: RouteContext<"/api/constituency/[id]">
+  ctx: { params: Promise<{ id: string }> }
 ) {
   const { id } = await ctx.params;
   const acNo = parseInt(id);

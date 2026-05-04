@@ -79,7 +79,7 @@ export default function ConstituencyTable({
                   <td className="px-4 py-3 text-gray-500 text-xs">{c.id}</td>
                   <td className="px-4 py-3">
                     <Link
-                      href={`/constituency/${c.id}`}
+                      href={`/tnla2026/constituency/${c.id}`}
                       className="font-medium text-gray-100 hover:text-white hover:underline"
                     >
                       {c.name}
