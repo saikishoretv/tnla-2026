@@ -10,6 +10,17 @@ async function DashboardContent() {
   const summary = await fetchSummary();
   const leadingParty = summary.parties[0];
 
+  // Alliance seat totals
+  const allianceTotals = summary.parties.reduce<Record<string, number>>((acc, p) => {
+    acc[p.alliance] = (acc[p.alliance] ?? 0) + p.total;
+    return acc;
+  }, {});
+  const allianceBadges = [
+    { label: "TVK (Solo)", seats: allianceTotals["TVK (Solo)"] ?? 0, color: "#FACC15" },
+    { label: "SPA Alliance", seats: allianceTotals["SPA Alliance"] ?? 0, color: "#F97316" },
+    { label: "ADMK+ Alliance", seats: allianceTotals["ADMK+ Alliance"] ?? 0, color: "#22C55E" },
+  ].filter((a) => a.seats > 0);
+
   return (
     <>
       {/* Header row */}
@@ -49,7 +60,7 @@ async function DashboardContent() {
             className="w-1 self-stretch rounded-full"
             style={{ backgroundColor: leadingParty.color }}
           />
-          <div>
+          <div className="flex-1 min-w-0">
             <p className="text-xs text-gray-400 uppercase tracking-wider mb-0.5">
               Currently Leading
             </p>
@@ -72,6 +83,16 @@ async function DashboardContent() {
                 </span>
               )}
             </p>
+          </div>
+          {/* Alliance totals */}
+          <div className="flex flex-wrap gap-3 shrink-0">
+            {allianceBadges.map((a) => (
+              <div key={a.label} className="flex flex-col items-center rounded-lg px-4 py-2"
+                style={{ backgroundColor: a.color + "18", border: `1px solid ${a.color}44` }}>
+                <span className="text-2xl font-bold" style={{ color: a.color }}>{a.seats}</span>
+                <span className="text-xs text-gray-400 mt-0.5 whitespace-nowrap">{a.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       )}
