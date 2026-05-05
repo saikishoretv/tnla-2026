@@ -31,10 +31,10 @@ export default async function OGImage() {
           <span style={{ color: "#9CA3AF", fontSize: 18 }}>allelectoralresults.info</span>
         </div>
 
-        <div style={{ color: "white", fontSize: 44, fontWeight: 800, marginBottom: 8, letterSpacing: "-1px" }}>
+        <div style={{ display: "flex", color: "white", fontSize: 44, fontWeight: 800, marginBottom: 8, letterSpacing: "-1px" }}>
           Pondicherry Assembly Election 2026
         </div>
-        <div style={{ color: "#6B7280", fontSize: 20, marginBottom: 48 }}>
+        <div style={{ display: "flex", color: "#6B7280", fontSize: 20, marginBottom: 48 }}>
           30 constituencies · Majority: 16
         </div>
 
@@ -53,10 +53,10 @@ export default async function OGImage() {
                 gap: 8,
               }}
             >
-              <div style={{ color: p.color, fontSize: 14, fontWeight: 600 }}>{i === 0 ? "🏆 Winner" : `#${i + 1}`}</div>
-              <div style={{ color: p.color, fontSize: 48, fontWeight: 800 }}>{p.total}</div>
-              <div style={{ color: "white", fontSize: 22, fontWeight: 700 }}>{p.party}</div>
-              <div style={{ color: "#9CA3AF", fontSize: 14 }}>{p.alliance}</div>
+              <div style={{ display: "flex", color: p.color, fontSize: 14, fontWeight: 600 }}>{i === 0 ? "🏆 Winner" : `#${i + 1}`}</div>
+              <div style={{ display: "flex", color: p.color, fontSize: 48, fontWeight: 800 }}>{p.total}</div>
+              <div style={{ display: "flex", color: "white", fontSize: 22, fontWeight: 700 }}>{p.party}</div>
+              <div style={{ display: "flex", color: "#9CA3AF", fontSize: 14 }}>{p.alliance}</div>
             </div>
           ))}
         </div>
