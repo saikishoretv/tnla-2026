@@ -8,8 +8,8 @@ A live election results tracker covering Indian state assembly elections.
 - Date: May 4, 2026
 - Constituencies: 234
 - Majority: 118 seats
-- Result: TVK (Tamilaga Vettri Kazhagam) won with 107 seats
-- Runner-up: DMK (Dravida Munnetra Kazhagam) with 60 seats
+- Result: TVK (Tamilaga Vettri Kazhagam) won with 108 seats
+- Runner-up: DMK (Dravida Munnetra Kazhagam) with 59 seats
 - Third: AIADMK (All India Anna Dravida Munnetra Kazhagam) with 47 seats
 - Key alliances: TVK (Solo) 107, SPA Alliance (DMK-led) 74, ADMK+ Alliance 53
 - Notable: Thalapathy Vijay's TVK won a landslide in their debut election
